@@ -27,4 +27,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(ErrorResponse.of(exception.getMessage()));
     }
+
+    @ExceptionHandler(RegistrationNotAllowedException.class)
+    ResponseEntity<ErrorResponse> handleRegistrationNotAllowed(RegistrationNotAllowedException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(ErrorResponse.of(exception.getMessage()));
+    }
 }
