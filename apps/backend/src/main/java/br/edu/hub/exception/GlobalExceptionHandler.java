@@ -33,4 +33,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(ErrorResponse.of(exception.getMessage()));
     }
+
+    @ExceptionHandler(ActivityNotFoundException.class)
+ResponseEntity<ErrorResponse> handleActivityNotFound(
+        ActivityNotFoundException exception) {
+
+    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            .body(ErrorResponse.of(exception.getMessage()));
+}
 }
