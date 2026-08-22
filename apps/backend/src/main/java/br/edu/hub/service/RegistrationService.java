@@ -3,7 +3,9 @@ package br.edu.hub.service;
 import br.edu.hub.dto.RegistrationRequest;
 import br.edu.hub.dto.RegistrationResponse;
 import br.edu.hub.entity.Activity;
+import br.edu.hub.entity.ActivityStatus;
 import br.edu.hub.entity.Registration;
+import br.edu.hub.exception.RegistrationNotAllowedException;
 import br.edu.hub.repository.ActivityRepository;
 import br.edu.hub.repository.RegistrationRepository;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,14 @@ public class RegistrationService {
     @Transactional
     public RegistrationResponse register(Long activityId, RegistrationRequest request) {
         Activity activity = activityService.requireActivity(activityId);
+
+        if (activity.getStatus() == ActivityStatus.CLOSED) {
+            throw new RegistrationNotAllowedException("Activity is closed");
+        }
+        if (activity.getStatus() == ActivityStatus.FULL || activity.remainingSpots() <= 0) {
+            throw new RegistrationNotAllowedException("Activity is full");
+        }
+
         Registration registration = registrationRepository.save(
                 new Registration(activity, request.studentName(), request.studentEmail())
         );
