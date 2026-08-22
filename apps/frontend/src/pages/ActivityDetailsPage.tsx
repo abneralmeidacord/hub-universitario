@@ -2,6 +2,8 @@ import { Link, useParams } from 'react-router-dom'
 import { RegistrationForm } from '../components/RegistrationForm'
 import { useActivity, useRegistrations } from '../hooks/useActivities'
 import { categoryLabels, formatActivityDate, statusLabels } from '../utils/activity'
+import {useState, useEffect} from 'react'
+
 
 export function ActivityDetailsPage() {
   const { id } = useParams()
@@ -9,9 +11,25 @@ export function ActivityDetailsPage() {
   const activityQuery = useActivity(activityId)
   const registrationsQuery = useRegistrations(activityId)
 
+
+  const [remainingSpots, setRemainingSpots] = useState(0)
+  const [registeredCount, setRegisteredCount] = useState(0)
+  const [status, setStatus] = useState<'OPEN' | 'FULL' | 'CLOSED'>('OPEN')
+
+
+  useEffect(() => {
+    if(activityQuery.data){
+      setRemainingSpots(activityQuery.data.remainingSpots ?? 0);
+      setRegisteredCount(activityQuery.data.registeredCount ?? 0);
+      setStatus(activityQuery.data.status ?? 'OPEN');
+    }
+  }, [activityQuery.data?.remainingSpots, activityQuery.data?.registeredCount, activityQuery.data?.status]);
+
+
   if (activityQuery.isLoading) {
     return <main className="page-shell detail-page"><div className="state-card">Carregando atividade...</div></main>
   }
+
 
   if (activityQuery.isError || !activityQuery.data) {
     return (
@@ -25,8 +43,10 @@ export function ActivityDetailsPage() {
     )
   }
 
+
   const activity = activityQuery.data
-  const occupancy = Math.min((activity.registeredCount / activity.capacity) * 100, 100)
+  const occupancy = Math.min((registeredCount / activity.capacity) * 100, 100)
+
 
   return (
     <main className="page-shell detail-page">
@@ -37,8 +57,8 @@ export function ActivityDetailsPage() {
             <span className={`badge category category-${activity.category.toLowerCase()}`}>
               {categoryLabels[activity.category]}
             </span>
-            <span className={`badge status status-${activity.status.toLowerCase()}`}>
-              {statusLabels[activity.status]}
+            <span className={`badge status status-${status.toLowerCase()}`}>
+              {statusLabels[status]}
             </span>
           </div>
           <h1>{activity.title}</h1>
@@ -52,15 +72,24 @@ export function ActivityDetailsPage() {
         </div>
         <aside className="detail-capacity">
           <span>Disponibilidade</span>
-          <strong>{activity.remainingSpots}</strong>
+          <strong>{remainingSpots}</strong>
           <p>vagas restantes</p>
           <div className="progress" aria-label={`${occupancy}% das vagas ocupadas`}>
             <span style={{ width: `${occupancy}%` }} />
           </div>
-          <small>{activity.registeredCount} de {activity.capacity} inscritos</small>
+          <small>{registeredCount} de {activity.capacity} inscritos</small>
         </aside>
       </article>
-      <RegistrationForm activityId={activity.id} disabled={activity.status !== 'OPEN'} />
+      <RegistrationForm
+            maxSpots={activity.capacity}
+            setStatus={setStatus}
+            registeredCount={registeredCount}
+            remainingSpots={remainingSpots}
+            setRemainingSpots={setRemainingSpots}
+            setRegisteredCount={setRegisteredCount}
+            activityId={activity.id}
+            disabled={status !== 'OPEN'}
+      />
     </main>
   )
 }
