@@ -5,6 +5,7 @@ import br.edu.hub.dto.RegistrationResponse;
 import br.edu.hub.entity.Activity;
 import br.edu.hub.entity.ActivityStatus;
 import br.edu.hub.entity.Registration;
+import br.edu.hub.exception.EmailAlreadyRegisteredException;
 import br.edu.hub.exception.RegistrationNotAllowedException;
 import br.edu.hub.repository.ActivityRepository;
 import br.edu.hub.repository.RegistrationRepository;
@@ -30,6 +31,14 @@ public class RegistrationService {
     @Transactional
     public RegistrationResponse register(Long activityId, RegistrationRequest request) {
         Activity activity = activityService.requireActivity(activityId);
+
+        // VALIDAÇÃO: Verifica se o email já está cadastrado nesta atividade
+        boolean emailJaCadastrado = registrationRepository
+                .existsByActivityIdAndStudentEmail(activityId, request.studentEmail());
+        
+        if (emailJaCadastrado) {
+            throw new EmailAlreadyRegisteredException("Email já foi cadastrado na atividade");
+        }
 
         if (activity.getStatus() == ActivityStatus.CLOSED) {
             throw new RegistrationNotAllowedException("Activity is closed");

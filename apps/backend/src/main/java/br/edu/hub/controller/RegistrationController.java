@@ -36,3 +36,4 @@ public class RegistrationController {
         return registrationService.list(activityId);
     }
 }
+
