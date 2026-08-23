@@ -28,3 +28,13 @@ export function filterActivities(activities: Activity[], category: CategoryFilte
     (activity) => activity.category === category,
   )
 }
+
+export function filterActivitiesBySearch(activities: Activity[], search: string) {
+  if (!search) return activities
+  const formattedSearch = search.toLowerCase().trim()
+  return activities.filter(
+    (activity) =>
+      activity.title.toLowerCase().includes(formattedSearch) ||
+      activity.description.toLowerCase().includes(formattedSearch),
+  )
+}

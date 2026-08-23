@@ -2,7 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { ActivityCard } from '../components/ActivityCard'
 import { ActivityFilters, type CategoryFilter } from '../components/ActivityFilters'
 import { useActivities } from '../hooks/useActivities'
-import { filterActivities } from '../utils/activity'
+import { filterActivities, filterActivitiesBySearch } from '../utils/activity'
 
 export function ActivitiesPage() {
   const [category, setCategory] = useState<CategoryFilter>('ALL')
@@ -15,7 +15,7 @@ export function ActivitiesPage() {
     setSearch(searchInput.trim())
   }
 
-  const filteredActivities = filterActivities(activitiesQuery.data ?? [], category)
+  const filteredActivities = filterActivitiesBySearch(filterActivities(activitiesQuery.data ?? [], category), search)
 
   return (
     <main>
