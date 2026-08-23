@@ -79,6 +79,7 @@ export function RegistrationForm({
               value={studentName}
               onChange={(event) => setStudentName(event.target.value)}
               minLength={3}
+              maxLength={100}
               required
               placeholder="Seu nome completo"
             />
@@ -90,6 +91,7 @@ export function RegistrationForm({
               value={studentEmail}
               onChange={(event) => setStudentEmail(event.target.value)}
               type="email"
+              maxLength={159}
               required
               placeholder="voce@email.com"
             />
