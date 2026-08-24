@@ -2,16 +2,17 @@
 
 :root {
   color: #111;
-  background-color: #fff;
+  background-color: #fefefe;
   font-family: 'DM Sans', system-ui, sans-serif;
-  font-synthesis: none;
+  font-synthesis: style;
   text-rendering: optimizeLegibility;
-  --navy: #111;
-  --blue: #111;
-  --blue-dark: #000;
-  --mint: #444;
-  --line: #eaeaea;
-  --muted: #666;
+  --navy: #071A52;
+  --blue: #5fdaf0;
+  --blue-dark: #1239C5;
+  --mint: #22C55E;
+  --line: #E5EAF2;
+  --muted: #b5becb;
+  --white: #fefefe;
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
@@ -59,8 +60,8 @@ h3,
 }
 
 .site-header {
-  background: #fff;
-  border-bottom: 1px solid var(--line);
+  background: var(--blue-dark);
+  border-bottom: 1px solid var(--blue-dark);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -80,7 +81,7 @@ h3,
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #111;
+  color: var(--white);
   font-weight: 700;
   font-size: 1.25rem;
   letter-spacing: -0.02em;
@@ -93,30 +94,34 @@ nav {
 
 nav a {
   text-decoration: none;
-  color: var(--muted);
+  color: var(--white);
   font-weight: 500;
   font-size: 0.95rem;
   transition: color 0.2s;
 }
 
 nav a:hover {
-  color: #111;
+  color: var(--blue);
 }
 
 nav a.active {
-  color: #111;
+  color: var(--blue);
   font-weight: 600;
-  border-bottom: 2px solid #031B73
+  border-bottom: 1px solid var(--white);
+  font-style: italic;
 }
 
 .hero {
-  color: #111;
-  background: #fff;
+  color: var(--white);
+  background: linear-gradient(135deg,
+      var(--blue-dark) 50%,
+      #fefefe 100%);
   border-bottom: 1px solid var(--line);
+
 }
 
 .hero-content {
-  padding-block: 80px;
+  padding-block: 40px;
 }
 
 .hero h1 {
@@ -129,14 +134,14 @@ nav a.active {
 }
 
 .hero p:not(.eyebrow) {
-  color: var(--muted);
+  color: var(--line);
   max-width: 620px;
   font-size: 1.125rem;
   line-height: 1.6;
 }
 
 .eyebrow {
-  color: var(--muted);
+  color: var(--blue);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 600;
@@ -144,8 +149,10 @@ nav a.active {
   margin-bottom: 16px;
 }
 
-.hero .eyebrow {
-  color: var(--muted);
+.hero h1 a{
+  color: var(--blue);
+  font-style: italic;
+
 }
 
 .search-form {
@@ -172,17 +179,18 @@ nav a.active {
 .primary-button {
   border: 0;
   border-radius: 6px;
-  background: #111;
+  background: var(--blue-dark);
   color: white;
   padding: 12px 24px;
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s;
+
 }
 
 .search-form button:hover,
 .primary-button:hover {
-  background: #333;
+  background: var(--navy);
 }
 
 .activities-section {
