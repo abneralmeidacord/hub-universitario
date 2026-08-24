@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from 'react'
+import { useState, type Dispatch, type FormEvent, type SetStateAction } from 'react'
 import axios from 'axios'
 import { useCreateRegistration } from '../hooks/useActivities'
 import type { ApiError } from '../types/activity'
@@ -8,18 +8,14 @@ interface RegistrationFormProps {
   activityId: number
   disabled?: boolean
   remainingSpots: number
-  registeredCount: number
-  maxSpots: number
-  setRemainingSpots: Function
-  setRegisteredCount: Function
-  setStatus: Function
+  setRemainingSpots: Dispatch<SetStateAction<number>>
+  setRegisteredCount: Dispatch<SetStateAction<number>>
+  setStatus: Dispatch<SetStateAction<'OPEN' | 'FULL' | 'CLOSED'>>
 }
 
 
 export function RegistrationForm({  
-    maxSpots,
     setStatus ,
-    registeredCount ,
     remainingSpots ,
     setRemainingSpots ,
     setRegisteredCount ,
@@ -39,22 +35,15 @@ export function RegistrationForm({
         onSuccess: () => {
           setStudentName('')
           setStudentEmail('')
+          setRemainingSpots((current) => Math.max(0, current - 1))
+          setRegisteredCount((current) => current + 1)
+          if (remainingSpots <= 1) {
+            setStatus('FULL')
+          }
         },
       },
     )
   }
-
-
-  useEffect(() => {
-    if (registration.isSuccess) {
-      setRemainingSpots(remainingSpots - 1);
-      setRegisteredCount(registeredCount + 1);
-
-      if(registeredCount +1 >= maxSpots) {
-        setStatus('FULL');
-      }
-    }
-  }, [registration.isSuccess]);
 
 
   const apiError = axios.isAxiosError<ApiError>(registration.error)

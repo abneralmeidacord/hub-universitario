@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import { RegistrationForm } from '../components/RegistrationForm'
 import { useActivity, useRegistrations } from '../hooks/useActivities'
 import { categoryLabels, formatActivityDate, statusLabels } from '../utils/activity'
+import { getActivityImage } from '../utils/activityImages'
 import {useState, useEffect} from 'react'
 
 
@@ -23,7 +24,7 @@ export function ActivityDetailsPage() {
       setRegisteredCount(activityQuery.data.registeredCount ?? 0);
       setStatus(activityQuery.data.status ?? 'OPEN');
     }
-  }, [activityQuery.data?.remainingSpots, activityQuery.data?.registeredCount, activityQuery.data?.status]);
+  }, [activityQuery.data]);
 
 
   if (activityQuery.isLoading) {
@@ -52,6 +53,7 @@ export function ActivityDetailsPage() {
     <main className="page-shell detail-page">
       <Link className="back-link" to="/activities">← Voltar para atividades</Link>
       <article className="detail-card">
+        <div className="detail-banner" style={{ backgroundImage: `url(${getActivityImage(activity.title, activity.category)})` }} role="img" aria-label={`Imagem da atividade ${activity.title}`} />
         <div className="detail-main">
           <div className="card-topline">
             <span className={`badge category category-${activity.category.toLowerCase()}`}>
@@ -81,9 +83,7 @@ export function ActivityDetailsPage() {
         </aside>
       </article>
       <RegistrationForm
-            maxSpots={activity.capacity}
             setStatus={setStatus}
-            registeredCount={registeredCount}
             remainingSpots={remainingSpots}
             setRemainingSpots={setRemainingSpots}
             setRegisteredCount={setRegisteredCount}

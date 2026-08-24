@@ -17,7 +17,13 @@ describe('RegistrationForm', () => {
 
     render(
       <QueryClientProvider client={client}>
-        <RegistrationForm activityId={1} />
+        <RegistrationForm
+          activityId={1}
+          remainingSpots={10}
+          setRemainingSpots={vi.fn()}
+          setRegisteredCount={vi.fn()}
+          setStatus={vi.fn()}
+        />
       </QueryClientProvider>,
     )
 
