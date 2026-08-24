@@ -3,6 +3,7 @@ import { ActivityCard } from '../components/ActivityCard'
 import { ActivityFilters, type CategoryFilter } from '../components/ActivityFilters'
 import { useActivities } from '../hooks/useActivities'
 import { filterActivities, filterActivitiesBySearch } from '../utils/activity'
+import { Icon } from '../components/Icon'
 
 export function ActivitiesPage() {
   const [category, setCategory] = useState<CategoryFilter>('ALL')
@@ -20,6 +21,7 @@ export function ActivitiesPage() {
   return (
     <main>
       <section className="hero">
+        <div className="hero-image" aria-hidden="true" />
         <div className="page-shell hero-content">
           <p className="eyebrow">Descubra. Participe. Transforme.</p>
           <h1>Viva tudo o que a <a>universidade</a> oferece.</h1>
@@ -32,7 +34,7 @@ export function ActivitiesPage() {
               onChange={(event) => setSearchInput(event.target.value)}
               placeholder="Buscar atividades..."
             />
-            <button type="submit">Buscar</button>
+            <button type="submit"><Icon name="search" />Buscar</button>
           </form>
         </div>
       </section>

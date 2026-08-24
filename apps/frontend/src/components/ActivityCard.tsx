@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import type { Activity } from '../types/activity'
 import { categoryLabels, formatActivityDate, statusLabels } from '../utils/activity'
+import { getActivityImage } from '../utils/activityImages'
 
 interface ActivityCardProps {
   activity: Activity
@@ -8,9 +9,11 @@ interface ActivityCardProps {
 
 export function ActivityCard({ activity }: ActivityCardProps) {
   const occupancy = Math.min((activity.registeredCount / activity.capacity) * 100, 100)
+  const bannerImage = getActivityImage(activity.title, activity.category)
 
   return (
     <article className="activity-card">
+      <div className="activity-banner" style={{ backgroundImage: `url(${bannerImage})` }} role="img" aria-label={`Imagem da atividade ${activity.title}`} />
       <div className="card-topline">
         <span className={`badge category category-${activity.category.toLowerCase()}`}>
           {categoryLabels[activity.category]}

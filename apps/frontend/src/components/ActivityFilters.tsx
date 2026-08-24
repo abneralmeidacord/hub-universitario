@@ -1,5 +1,6 @@
 import type { ActivityCategory } from '../types/activity'
 import { categoryLabels } from '../utils/activity'
+import { Icon } from './Icon'
 
 export type CategoryFilter = ActivityCategory | 'ALL'
 
@@ -17,6 +18,15 @@ const categories: CategoryFilter[] = [
   'EVENT',
 ]
 
+const categoryIcons = {
+  ALL: 'check',
+  WORKSHOP: 'code',
+  LECTURE: 'speaker',
+  COURSE: 'palette',
+  EXTENSION_PROJECT: 'users',
+  EVENT: 'calendar',
+} as const
+
 export function ActivityFilters({ selected, onChange }: ActivityFiltersProps) {
   return (
     <div className="filter-group" role="group" aria-label="Filtrar por categoria">
@@ -27,6 +37,7 @@ export function ActivityFilters({ selected, onChange }: ActivityFiltersProps) {
           type="button"
           onClick={() => onChange(category)}
         >
+          <Icon name={categoryIcons[category]} />
           {category === 'ALL' ? 'Todas' : categoryLabels[category]}
         </button>
       ))}
