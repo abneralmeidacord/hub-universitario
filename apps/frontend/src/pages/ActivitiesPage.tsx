@@ -22,7 +22,7 @@ export function ActivitiesPage() {
       <section className="hero">
         <div className="page-shell hero-content">
           <p className="eyebrow">Descubra. Participe. Transforme.</p>
-          <h1>Viva tudo o que a universidade oferece.</h1>
+          <h1>Viva tudo o que a <a>universidade</a> oferece.</h1>
           <p>Encontre oficinas, cursos, projetos e eventos para ampliar sua experiência acadêmica.</p>
           <form className="search-form" onSubmit={handleSearch} role="search">
             <label className="sr-only" htmlFor="activity-search">Buscar atividades</label>
