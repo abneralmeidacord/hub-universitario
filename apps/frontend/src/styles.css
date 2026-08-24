@@ -8,7 +8,7 @@
   text-rendering: optimizeLegibility;
   --navy: #071A52;
   --blue: #5fdaf0;
-  --blue-dark: #1239C5;
+  --blue-dark: #264acc;
   --mint: #22C55E;
   --line: #E5EAF2;
   --muted: #b5becb;
@@ -114,7 +114,7 @@ nav a.active {
 .hero {
   color: var(--white);
   background: linear-gradient(135deg,
-      var(--blue-dark) 50%,
+      var(--blue-dark) 60%,
       #fefefe 100%);
   border-bottom: 1px solid var(--line);
 
