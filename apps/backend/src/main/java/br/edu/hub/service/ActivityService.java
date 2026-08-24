@@ -3,6 +3,7 @@ package br.edu.hub.service;
 import br.edu.hub.dto.ActivityResponse;
 import br.edu.hub.dto.ActivityUpdateRequest;
 import br.edu.hub.entity.Activity;
+import br.edu.hub.exception.ActivityNotFoundException;
 import br.edu.hub.repository.ActivityRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +46,6 @@ public class ActivityService {
 
     public Activity requireActivity(Long id) {
         return activityRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Activity not found"));
+                 .orElseThrow(() -> new ActivityNotFoundException());
     }
 }
