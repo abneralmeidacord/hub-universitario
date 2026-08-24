@@ -1,17 +1,35 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import axios from 'axios'
 import { useCreateRegistration } from '../hooks/useActivities'
 import type { ApiError } from '../types/activity'
 
+
 interface RegistrationFormProps {
   activityId: number
   disabled?: boolean
+  remainingSpots: number
+  registeredCount: number
+  maxSpots: number
+  setRemainingSpots: Function
+  setRegisteredCount: Function
+  setStatus: Function
 }
 
-export function RegistrationForm({ activityId, disabled = false }: RegistrationFormProps) {
+
+export function RegistrationForm({  
+    maxSpots,
+    setStatus ,
+    registeredCount ,
+    remainingSpots ,
+    setRemainingSpots ,
+    setRegisteredCount ,
+    activityId,
+    disabled = false }: RegistrationFormProps) {
+ 
   const [studentName, setStudentName] = useState('')
   const [studentEmail, setStudentEmail] = useState('')
   const registration = useCreateRegistration(activityId)
+
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -26,9 +44,23 @@ export function RegistrationForm({ activityId, disabled = false }: RegistrationF
     )
   }
 
+
+  useEffect(() => {
+    if (registration.isSuccess) {
+      setRemainingSpots(remainingSpots - 1);
+      setRegisteredCount(registeredCount + 1);
+
+      if(registeredCount +1 >= maxSpots) {
+        setStatus('FULL');
+      }
+    }
+  }, [registration.isSuccess]);
+
+
   const apiError = axios.isAxiosError<ApiError>(registration.error)
     ? registration.error.response?.data.message
     : undefined
+
 
   return (
     <section className="registration-panel" aria-labelledby="registration-title">
@@ -47,6 +79,7 @@ export function RegistrationForm({ activityId, disabled = false }: RegistrationF
               value={studentName}
               onChange={(event) => setStudentName(event.target.value)}
               minLength={3}
+              maxLength={100}
               required
               placeholder="Seu nome completo"
             />
@@ -58,6 +91,7 @@ export function RegistrationForm({ activityId, disabled = false }: RegistrationF
               value={studentEmail}
               onChange={(event) => setStudentEmail(event.target.value)}
               type="email"
+              maxLength={159}
               required
               placeholder="voce@email.com"
             />
@@ -68,7 +102,7 @@ export function RegistrationForm({ activityId, disabled = false }: RegistrationF
         </form>
       )}
       {registration.isSuccess && (
-        <p className="notice success" role="status">Inscrição realizada com sucesso!</p>
+        <p className="notice success" role="status">Inscrição realizada com sucesso!</p>  
       )}
       {registration.isError && (
         <p className="notice error" role="alert">{apiError ?? 'Não foi possível realizar a inscrição.'}</p>

@@ -2,7 +2,7 @@
 
 :root {
   color: #111;
-  background: #fff;
+  background-color: #fff;
   font-family: 'DM Sans', system-ui, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -30,7 +30,7 @@ h1, h2, h3, .brand { font-family: 'Manrope', system-ui, sans-serif; }
 nav { display: flex; gap: 24px; }
 nav a { text-decoration: none; color: var(--muted); font-weight: 500; font-size: 0.95rem; transition: color 0.2s; }
 nav a:hover { color: #111; }
-nav a.active { color: #111; font-weight: 600; }
+nav a.active { color: #111; font-weight: 600; border-bottom: 2px solid #031B73 }
 
 .hero { color: #111; background: #fff; border-bottom: 1px solid var(--line); }
 .hero-content { padding-block: 80px; }
@@ -58,8 +58,11 @@ nav a.active { color: #111; font-weight: 600; }
 .activity-card > .card-topline { padding: 24px 24px 0; }
 .badge { border: 1px solid var(--line); border-radius: 4px; padding: 4px 8px; font-size: .65rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
 .category { background: transparent; }
-.category-extension_project { background: transparent; }
-.category-event { background: transparent; }
+.category-extension_project { color: #2f17b4; background: #2f17b42d; }
+.category-event { color: #0a8f67; background: #0a8f672d; }
+.category-course{color: #c47a0a; background: #c47a0a2d; }
+.category-workshop{color: #1e3eb3; background: #1e3eb32d; }
+.category-lecture{color: #c7a900; background: #dfbd002d; }
 .status { position: relative; padding-left: 17px; color: var(--muted); background: transparent; }
 .status::before { content: ''; position: absolute; left: 5px; top: 50%; width: 7px; height: 7px; border-radius: 50%; transform: translateY(-50%); background: currentColor; }
 .status-open { color: #0a8f67; }
@@ -75,9 +78,9 @@ nav a.active { color: #111; font-weight: 600; }
 .card-meta dd { margin: 0; color: var(--navy); font-weight: 500; }
 .capacity-block { padding: 0 24px 24px; }
 .capacity-label { display: flex; justify-content: space-between; gap: 8px; font-size: .8rem; color: var(--muted); margin-bottom: 8px; }
-.capacity-label strong { color: var(--navy); }
+.capacity-label strong { color: var(--blue); }
 .progress { height: 4px; border-radius: 2px; background: var(--line); overflow: hidden; }
-.progress span { display: block; height: 100%; background: #111; border-radius: inherit; }
+.progress span { display: block; height: 100%; background-color: #031B73; border-radius: inherit; } 
 .card-link { display: flex; justify-content: space-between; padding: 16px 24px; border-top: 1px solid var(--line); color: #111; font-weight: 500; text-decoration: none; transition: background 0.2s; }
 .card-link:hover { background: #fafafa; }
 
@@ -86,26 +89,29 @@ nav a.active { color: #111; font-weight: 600; }
 .error-state button { border: 0; color: #111; background: transparent; cursor: pointer; font-weight: 600; text-decoration: underline; }
 .detail-page { padding-block: 48px 80px; }
 .back-link { display: inline-block; color: var(--muted); font-weight: 500; text-decoration: none; margin-bottom: 24px; transition: color 0.2s; }
-.back-link:hover { color: #111; }
+.back-link:hover { color: #1e3eb3; border-bottom: 1px solid #1e3eb3; }
 .detail-card { display: grid; grid-template-columns: 1fr 320px; gap: 40px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 48px; }
 .detail-main h1 { color: var(--navy); font-size: clamp(2rem, 5vw, 2.5rem); margin: 24px 0 16px; letter-spacing: -0.02em; font-weight: 700; }
 .detail-description { color: var(--muted); font-size: 1.05rem; line-height: 1.75; }
 .detail-meta { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 40px 0 0; }
 .detail-meta div { border-top: 1px solid var(--line); padding-top: 16px; }
-.detail-meta dt { color: var(--muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
+.detail-meta dt { color: #1e3eb3; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; font-weight: 800; }
 .detail-meta dd { margin: 8px 0 0; font-weight: 500; color: var(--navy); }
 .detail-capacity { background: #fafafa; border: 1px solid var(--line); border-radius: 8px; padding: 32px; text-align: center; align-self: start; }
-.detail-capacity > span { color: var(--muted); font-weight: 500; }
-.detail-capacity > strong { display: block; color: #111; font: 700 3.5rem 'Manrope'; margin-top: 8px; line-height: 1; }
-.detail-capacity p { color: var(--muted); }
+.detail-capacity > span { color: #031B73; font-weight: 1000;}
+.detail-capacity > strong { display: block; color: #031B73; font: 700 3.5rem 'Manrope'; margin-top: 8px; line-height: 1; }
+.detail-capacity p { color: var(--muted); } 
 .detail-capacity small { display: block; color: var(--muted); margin-top: 12px; }
 .registration-panel { margin-top: 32px; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 32px; }
+.registration-panel div .eyebrow {color: #1e3eb3; font-weight: 800;}
 .registration-panel h2 { color: var(--navy); font-weight: 600; font-size: 1.25rem; }
 .registration-panel form { display: grid; grid-template-columns: 1fr 1fr auto; align-items: end; gap: 16px; }
 .registration-panel label { display: grid; gap: 8px; color: var(--muted); font-size: .85rem; font-weight: 500; }
 .registration-panel input { border: 1px solid var(--line); border-radius: 6px; padding: 12px; outline: none; background: #fafafa; transition: border-color 0.2s; }
-.registration-panel input:focus { border-color: #999; background: #fff; }
-.primary-button:disabled { opacity: .5; cursor: not-allowed; }
+.registration-panel input:focus { border-color: #1e3eb3; background: #fff; }
+.primary-button { background-color: #1e3eb3; color: white; transition: all 0.3s; }
+.primary-button:hover{ transform: scale(1.02); background-color: #1434a7; }
+.primary-button:disabled { opacity: .5; cursor: not-allowed; } 
 .notice { border-radius: 6px; padding: 16px; margin: 24px 0 0; border: 1px solid; }
 .notice.success { color: #087354; background: #f0fdf4; border-color: #bbf7d0; }
 .notice.error, .notice.warning { color: #9a4e06; background: #fffbeb; border-color: #fef08a; }

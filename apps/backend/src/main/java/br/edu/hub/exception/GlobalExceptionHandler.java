@@ -41,4 +41,10 @@ ResponseEntity<ErrorResponse> handleActivityNotFound(
     return ResponseEntity.status(HttpStatus.NOT_FOUND)
             .body(ErrorResponse.of(exception.getMessage()));
 }
+    @ExceptionHandler(EmailAlreadyRegisteredException.class)
+    ResponseEntity<ErrorResponse> handleEmailAlreadyRegistered(EmailAlreadyRegisteredException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(ErrorResponse.of(exception.getMessage()));
+    }
+
 }
