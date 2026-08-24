@@ -91,7 +91,7 @@ export function RegistrationForm({
               value={studentEmail}
               onChange={(event) => setStudentEmail(event.target.value)}
               type="email"
-              maxLength={159}
+              maxLength={160}
               required
               placeholder="voce@email.com"
             />
