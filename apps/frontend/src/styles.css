@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap');
 
 :root {
-  color: #111;
+  color: var(--navy);
   background-color: #fefefe;
   font-family: 'DM Sans', system-ui, sans-serif;
   font-synthesis: style;
@@ -149,7 +149,7 @@ nav a.active {
   margin-bottom: 16px;
 }
 
-.hero h1 a{
+.hero h1 a {
   color: var(--blue);
   font-style: italic;
 
@@ -158,7 +158,7 @@ nav a.active {
 .search-form {
   display: flex;
   width: min(650px, 100%);
-  background: #fff;
+  background: var(--white);
   border: 1px solid var(--line);
   padding: 4px;
   border-radius: 8px;
@@ -237,12 +237,12 @@ nav a.active {
 
 .filter-group button:hover {
   border-color: #aaa;
-  color: #111;
+  color: var(--navy);
 }
 
 .filter-group .filter-active {
-  border-color: #111;
-  color: #111;
+  border-color: var(--navy);
+  color: var(--navy);
   background: #f9f9f9;
 }
 
@@ -253,7 +253,7 @@ nav a.active {
 }
 
 .activity-card {
-  background: #fff;
+  background: var(--white);
   border: 1px solid var(--line);
   border-radius: 8px;
   overflow: hidden;
@@ -433,7 +433,7 @@ nav a.active {
 .progress span {
   display: block;
   height: 100%;
-  background-color: #031B73;
+  background-color: var(--navy);
   border-radius: inherit;
 }
 
@@ -442,7 +442,7 @@ nav a.active {
   justify-content: space-between;
   padding: 16px 24px;
   border-top: 1px solid var(--line);
-  color: #111;
+  color: var(--navy);
   font-weight: 500;
   text-decoration: none;
   transition: background 0.2s;
@@ -453,7 +453,7 @@ nav a.active {
 }
 
 .state-card {
-  background: #fff;
+  background: var(--white);
   border: 1px dashed #ccc;
   border-radius: 8px;
   padding: 40px;
@@ -468,7 +468,7 @@ nav a.active {
 
 .error-state button {
   border: 0;
-  color: #111;
+  color: var(--navy);
   background: transparent;
   cursor: pointer;
   font-weight: 600;
@@ -477,6 +477,7 @@ nav a.active {
 
 .detail-page {
   padding-block: 48px 80px;
+  background: var(--white)
 }
 
 .back-link {
@@ -497,7 +498,7 @@ nav a.active {
   display: grid;
   grid-template-columns: 1fr 320px;
   gap: 40px;
-  background: #fff;
+  background: var(--white);
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 48px;
@@ -553,13 +554,13 @@ nav a.active {
 }
 
 .detail-capacity>span {
-  color: #031B73;
+  color: var(--navy);
   font-weight: 1000;
 }
 
 .detail-capacity>strong {
   display: block;
-  color: #031B73;
+  color: var(--navy);
   font: 700 3.5rem 'Manrope';
   margin-top: 8px;
   line-height: 1;
@@ -577,7 +578,7 @@ nav a.active {
 
 .registration-panel {
   margin-top: 32px;
-  background: #fff;
+  background: var(--white);
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 32px;
@@ -620,7 +621,7 @@ nav a.active {
 
 .registration-panel input:focus {
   border-color: #1e3eb3;
-  background: #fff;
+  background: var(--white);
 }
 
 .primary-button {
@@ -655,7 +656,7 @@ nav a.active {
 .notice.error,
 .notice.warning {
   color: #9a4e06;
-  background: #fffbeb;
+  background: var(--white)beb;
   border-color: #fef08a;
 }
 
